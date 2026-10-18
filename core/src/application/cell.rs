@@ -1,16 +1,15 @@
 //! Application cell: holder of application state.
 
 use super::Application;
-use once_cell::sync::OnceCell;
-use std::ops::Deref;
+use std::{ops::Deref, sync::OnceLock};
 
 /// Application cell: holder of application state.
-pub struct AppCell<T>(OnceCell<T>);
+pub struct AppCell<T>(OnceLock<T>);
 
 impl<T> AppCell<T> {
     /// Create a new application cell.
     pub const fn new() -> AppCell<T> {
-        Self(OnceCell::new())
+        Self(OnceLock::new())
     }
 }
 

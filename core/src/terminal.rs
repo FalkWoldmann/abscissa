@@ -9,10 +9,10 @@ pub mod streams;
 pub use self::streams::Streams;
 pub use termcolor::{Color, ColorChoice, StandardStream};
 
-use once_cell::sync::OnceCell;
+use std::sync::OnceLock;
 
 /// Terminal streams
-static STREAMS: OnceCell<Streams> = OnceCell::new();
+static STREAMS: OnceLock<Streams> = OnceLock::new();
 
 /// Initialize the terminal subsystem, registering the [`Streams`] static
 pub(crate) fn init(color_choice: ColorChoice) {
